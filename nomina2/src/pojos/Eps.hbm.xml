@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/10/2019 03:03:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Eps" table="eps" catalog="nomina" optimistic-lock="version">
+        <id name="ideps" type="int">
+            <column name="ideps" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="45" not-null="true" />
+        </property>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+        <set name="seguridadSocials" table="`seguridad social`" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="eps_ideps" not-null="true" />
+            </key>
+            <one-to-many class="pojos.SeguridadSocial" />
+        </set>
+    </class>
+</hibernate-mapping>
