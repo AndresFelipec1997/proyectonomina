@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/10/2019 03:03:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Empresa" table="empresa" catalog="nomina" optimistic-lock="version">
+        <id name="idempresa" type="int">
+            <column name="idempresa" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="empleado" class="pojos.Empleado" fetch="select">
+            <column name="empleado_idempleado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nomina" class="pojos.Nomina" fetch="select">
+            <column name="nomina_idnomina" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="cargo" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
