@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 3/10/2019 03:03:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Empleado" table="empleado" catalog="nomina" optimistic-lock="version">
+        <id name="idempleado" type="int">
+            <column name="idempleado" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="descuentos" class="pojos.Descuentos" fetch="select">
+            <column name="descuentos_iddescuentos" not-null="true" />
+        </many-to-one>
+        <many-to-one name="seguridadSocial" class="pojos.SeguridadSocial" fetch="select">
+            <column name="`seguridad social_idseguridad social`" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vacaciones" class="pojos.Vacaciones" fetch="select">
+            <column name="vacaciones_idvacaciones" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="cargo" length="45" not-null="true" />
+        </property>
+        <set name="nominas" table="nomina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="empleado_idempleado" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Nomina" />
+        </set>
+        <set name="empresas" table="empresa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="empleado_idempleado" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Empresa" />
+        </set>
+    </class>
+</hibernate-mapping>
